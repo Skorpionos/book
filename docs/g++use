@@ -1,0 +1,18 @@
+Препроцессор:
+$ g++ -E hello.cpp -o hello_prerocessed.cpp
+
+Компиляция:
+$ g++ -c hello.cpp
+
+Линковка:
+$ g++ hello.o -o program.exe
+
+Автоматическая компиляция:
+$ g++ hello.cpp -o hello.exe
+
+Ассемблер:
+$ g++ -S hello.cpp
+
+Имя функции:
+$ c++filt.exe -n _ZStL8__ioinit
+std::__ioinit

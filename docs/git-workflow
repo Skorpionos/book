@@ -1,0 +1,72 @@
+#GitHub
+https://github.com/Skorpionos/CppLearning.git
+
+#show remote repositories
+git remote -v
+
+#add repositories
+git remote add <name> <address>
+git remote add origin 
+
+#remote repositories
+git remote rm <name>
+
+#push
+git push -u <name> <branch>
+git push -u origin master
+
+git push -u https://github.com/Skorpionos/CppLearning.git\
+
+#clone
+git clone <address> <local_folder_name>
+git clone https://github.com/Skorpionos/CppLearning.git
+
+#commit
+git commit -m 'init'
+
+#change last commit
+git commit --amend -m 'Modify'
+
+#reset
+git reset --soft HEAD^
+git reset --hard HEAD^
+git reset --hard HEAD^^
+
+#config
+git config -l
+git config --global color.ui true
+git config --global user.name 'Skorpionos'
+git config --global user.email smartfonner@gmail.com
+
+#new branch
+git branch <branch_name>
+git checkout <branch_name>
+echo "text" > cat.txt
+git add cat.txt
+git commit -m "Create cat"
+git checkout master
+git merge cat
+git branch -d cat
+
+git status
+git log --onelin
+
+git diff
+git diff --staged
+
+git add temp
+
+git rm -f temp
+ls -l
+find . -name *.cpp
+
+#extract only one folder from repository
+https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/
+
+git clone https://github.com/Skorpionos/CppLearning analyzer
+cd analyzer
+git filter-branch --prune-empty --subdirectory-filter analyzer master
+git remote -v // check
+git remote set-url origin https://github.com/Skorpionos/analyzer.git
+git remote -v // check
+git push -u origin master
