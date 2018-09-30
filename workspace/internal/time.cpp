@@ -1,10 +1,13 @@
 #include "time.h"
-#include "print.hpp"
+#include "print.h"
 
 #include <iostream>
 
 namespace util
 {
+
+//time_point_ns SolveDeltaTime(const time_point_ns time0)
+//ch::steady_clock::now()
 
 time_point_ns SolveDeltaTime(const time_point_ns time0)
 {

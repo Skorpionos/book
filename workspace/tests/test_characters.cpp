@@ -1,6 +1,6 @@
 #include "test_characters.h"
 
-#include "../trainings/character_actions.h"
+#include "../study/classes/character_actions.h"
 
 #include <algorithm>
 

@@ -1,0 +1,14 @@
+Quick defenition
+Inspection
+
+show suggestions as your type
+
+Alt+{
+Alt+Shift+{
+Alt+Q
+
+AceJump
+KeyPromoter
+
+home: Consolac 14 0.9
+work: Monospaced

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../study/matrix.h"
+
 //#include "../person.h"
 
 #include <boost/type_index.hpp>
@@ -9,6 +11,7 @@
 #include <stack>
 
 #include <iostream>
+#include <iomanip>
 
 namespace util
 {
@@ -39,7 +42,7 @@ void ShowType(T /*object*/)
 template <class T> void PrintHeader(T container);
 
 template <class T> void PrintContainer(T container);
-template <class T, size_t N> void PrintContainer(T (&container) [N]) noexcept;
+template <class T, size_t N> void PrintContainer(T (&array) [N]) noexcept;
 template <class T> void PrintContainer(const std::string& container);
 template <class T> void PrintContainer(std::stack<T> container);
 template <class T> void PrintContainer(std::queue<T> container);
@@ -125,10 +128,17 @@ void PrintContainer(std::map<K, V> container)
 //}
 
 template<class T, size_t N>
-void PrintContainer(T (&container) [N]) noexcept
+void PrintContainer(T (&array) [N]) noexcept
 {
-    for (const auto& element : container)
+    for (const auto& element : array)
         std::cout << element << " ";
+    std::cout << "\n";
+}
+template <class T>
+void PrintContainer(T array, size_t size) noexcept
+{
+    for (size_t index = 0; index < size; ++index)
+        std::cout << array[index] << " ";
     std::cout << "\n";
 }
 
@@ -152,6 +162,51 @@ void PrintHeader(T container)
 template <class T>
 void Print(T object);
 
-#include "print_impl.hpp"
+#include "print_impl.h"
 
-} // namespace internal_utilities
+template <class T>
+void PrintContainer(const matrix::Matrix<T>& matrix)
+{
+    constexpr size_t Width = 5;
+
+    std::cout << std::left;
+    for (size_t row = 0; row < matrix.rows_count(); ++row)
+    {
+        for (size_t column = 0; column < matrix.columns_count(); ++column)
+            std::cout << std::setw(Width) << matrix[row][column];
+        std::cout << "\n";
+    }
+
+}
+
+inline void PrintBreak()
+{
+    std::cout << "---------" << "\n";
+}
+
+inline void PrintComplete()
+{
+    std::cout << "=========\n" << "completed" << "\n";
+}
+
+} // namespace util
+
+namespace util::matrix
+{
+
+template <class T>
+void Print(T** matrix, size_t N, size_t M)
+{
+    PrintContainer(matrix, N, M);
+    util::PrintBreak();
+}
+
+template <class T>
+void Print(const util::matrix::Matrix<T>& matrix)
+{
+    PrintContainer(matrix);
+    util::PrintBreak();
+}
+
+}
+// namespace util::matrix

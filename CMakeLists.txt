@@ -12,30 +12,33 @@ add_subdirectory(libs/googletest)
 include_directories(libs/googletest/googletest/include)
 
 set(SOURCE_FILES
-        workspace/main.cpp
-        workspace/internal_utilities/print.hpp
-        workspace/internal_utilities/print_impl.hpp
-        workspace/internal_utilities/time.h
-        workspace/internal_utilities/time.cpp
-        workspace/trainings/person.h
+        workspace/internal/print.h
+        workspace/internal/print_impl.h
+        workspace/internal/time.h
+        workspace/internal/time.cpp
+        workspace/study/classes/person.h
         workspace/containers/list.h
-        workspace/trainings/character_actions.h
-        workspace/trainings/character_actions.cpp
+        workspace/study/classes/character_actions.h
+        workspace/study/classes/character_actions.cpp
         workspace/tests/test_characters.h
-        workspace/tests/test_characters.cpp)
+        workspace/tests/test_characters.cpp
+        workspace/study/arrays.cpp
+        workspace/study/strings.cpp)
 
-add_executable(book
+add_executable(MAIN
         ${SOURCE_FILES}
         workspace/main.cpp)
+target_link_libraries(MAIN)
 
-target_link_libraries(book)
-
-add_executable(test1
+add_executable(gtest_clock
         ${SOURCE_FILES}
-        workspace/gtests/test1.cpp)
+        workspace/gtests/gtest_clock.cpp)
+target_link_libraries(gtest_clock gtest gtest_main)
 
-target_link_libraries(test1 gtest gtest_main)
-
+add_executable(gtest_array
+        ${SOURCE_FILES}
+        workspace/gtests/gtest_array.cpp)
+target_link_libraries(gtest_array gtest gtest_main)
 
 #find_package(Boost COMPONENTS #[[system filesystem]] program_options REQUIRED)
 
