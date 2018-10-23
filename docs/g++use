@@ -19,5 +19,12 @@ $ std::__ioinit
 
 Дизассемблер:
 $ objdump.exe -d main.o
+
 Содержимое дополнительных таблиц объектного файла:
 $ objdump.exe -x main.o
+
+Иерархия классов
+$ g++ -fdump-class-hierarchy main.cpp
+
+Номер стандарта
+-std=c++17

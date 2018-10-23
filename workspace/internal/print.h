@@ -2,6 +2,8 @@
 
 #include "../study/matrix.h"
 
+#include "fmt/format.h"
+
 //#include "../person.h"
 
 #include <boost/type_index.hpp>
@@ -121,12 +123,6 @@ void PrintContainer(std::map<K, V> container)
     }
 };
 
-//template <>
-//void PrintContainer(const std::string& container)
-//{
-//    std::cout << container << "\n";
-//}
-
 template<class T, size_t N>
 void PrintContainer(T (&array) [N]) noexcept
 {
@@ -161,8 +157,23 @@ void PrintHeader(T container)
 
 template <class T>
 void Print(T object);
-
 #include "print_impl.h"
+
+//void Print() {}
+template <class T, class ... Args>
+void Print(const T& item, const Args& ... args)
+{
+    std::cout << " <" << sizeof...(args) << ">:" << item << " ";
+    Print(args...);
+}
+
+template <class T, class ... Args>
+void PrintLn(const T& item, const Args& ... args)
+{
+//    std::cout << "<" << sizeof...(args) << ":> ";
+    std::cout << item << "\n";
+    Print(args...);
+}
 
 template <class T>
 void PrintContainer(const matrix::Matrix<T>& matrix)
@@ -176,17 +187,82 @@ void PrintContainer(const matrix::Matrix<T>& matrix)
             std::cout << std::setw(Width) << matrix[row][column];
         std::cout << "\n";
     }
-
 }
 
-inline void PrintBreak()
+inline uint64_t ExtractVirtualTableAddress(const void* address)
 {
-    std::cout << "---------" << "\n";
+    return *reinterpret_cast<const uint64_t*>(address);
+}
+
+inline void DebugAddress(size_t virtualTableAddress, size_t size)
+{
+    fmt::print("[{:#x}] ", virtualTableAddress);
+
+    auto addressBegin = reinterpret_cast<const uint8_t*>(virtualTableAddress);
+
+    for (size_t index = 0; index < size; ++index)
+    {
+        fmt::print("{:#x} ", *addressBegin);
+        ++addressBegin;
+    }
+    fmt::print("\n");
+}
+
+//int main()
+//{
+//    const auto alexey = Man {"Alexey"};
+//    const auto sergey = Person {"Sergey"};
+//
+//    alexey.Print();
+//    sergey.Print();
+//
+//    util::DebugObject(alexey, sergey);
+//
+//    util::DebugAddress(util::ExtractVirtualTableAddress(&alexey), 20);
+//    util::DebugAddress(util::ExtractVirtualTableAddress(&sergey), 20);
+//}
+
+inline void DebugObjectLine(size_t index) {}
+
+template<class T, class ...Args>
+void DebugObjectLine(size_t index, T object, Args ...objects)
+{
+    auto address     = static_cast<void*>(&object);
+    auto addressByte = static_cast<uint8_t*>(address) + index;
+
+    fmt::print("{}:{:#x}\t", static_cast<void*>(addressByte), *addressByte);
+
+    // std::cout << " <" << sizeof...(objects) << ">:" << object << " ";
+
+    DebugObjectLine(index, objects...);
+}
+
+template <class T, class ...Args>
+void DebugObject(T object1, Args ...objects)
+{
+    auto size = sizeof(T);
+
+    fmt::print("[{}]\n", size);
+
+    // auto size = abs(static_cast<uint8_t*>(static_cast<void*>(&a2)) - static_cast<uint8_t*>(static_cast<void*>(&a1)));
+
+    for (size_t index = 0; index < size; ++index)
+    {
+        DebugObjectLine(index, object1, objects...);
+
+        fmt::print("\n");
+    }
+}
+
+inline void PrintBreak(char symbol = '-', size_t count = 10)
+{
+    std::cout << std::string(count, symbol) << "\n";
 }
 
 inline void PrintComplete()
 {
-    std::cout << "=========\n" << "completed" << "\n";
+    PrintBreak('=');
+    std::cout << "Completed." << "\n";
 }
 
 } // namespace util

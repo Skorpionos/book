@@ -8,8 +8,10 @@ project(book)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++17")
 
 add_subdirectory(libs/googletest)
-
 include_directories(libs/googletest/googletest/include)
+
+add_subdirectory(libs/fmt)
+include_directories(libs/fmt/include)
 
 set(SOURCE_FILES
         workspace/internal/print.h
@@ -28,7 +30,7 @@ set(SOURCE_FILES
 add_executable(MAIN
         ${SOURCE_FILES}
         workspace/main.cpp)
-target_link_libraries(MAIN)
+target_link_libraries(MAIN PRIVATE fmt-header-only)
 
 add_executable(gtest_clock
         ${SOURCE_FILES}

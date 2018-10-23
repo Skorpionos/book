@@ -10,6 +10,8 @@
 namespace util
 {
 
+// TODO Realize Array
+
 void RotateOneStep(int* array, unsigned size);
 
 void Rotate(int* array, unsigned size, int shift);
