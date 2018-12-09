@@ -15,6 +15,16 @@
 #include <iostream>
 #include <iomanip>
 
+namespace fmt
+{
+template <typename... Args>
+inline void println(string_view format_str, const Args& ... args)
+{
+    print(format_str, args...);
+    print("\n");
+}
+} // namespace fmt
+
 namespace util
 {
 
@@ -24,6 +34,7 @@ class _;
 constexpr size_t breakStringSize = 70;
 const auto headerString    = std::string(breakStringSize, '=').append("\n");
 const auto separateString  = std::string(breakStringSize, '-').append("\n");
+
 
 template<class T>
 void ShowType()
