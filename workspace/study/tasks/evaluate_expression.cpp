@@ -1,4 +1,7 @@
-#include "internal/io.h"
+#pragma once
+
+#include <iostream>
+#include "../../internal/print.h"
 
 struct Number;
 struct BinaryOperation;
@@ -47,8 +50,24 @@ struct BinaryOperation : Expression
         , m_operation(operation)
         , m_right(right) {}
 
+    BinaryOperation(double left, char operation, Expression const* right)
+        : m_left(new Number(left))
+        , m_operation(operation)
+        , m_right(right) {}
+
+    BinaryOperation(Expression const* left, char operation, double right)
+        : m_left(left)
+        , m_operation(operation)
+        , m_right(new Number(right)) {}
+
+    BinaryOperation(double left, char operation, double right)
+            : m_left(new Number(left))
+            , m_operation(operation)
+            , m_right(new Number(right)) {}
+
     ~BinaryOperation() override
     {
+//        std::cout << "- - - BinaryOperation destructor" << "\n";
         delete m_left;
         delete m_right;
     }
@@ -95,7 +114,7 @@ struct PrintVisitor : Visitor
 
     void Visit(BinaryOperation const* binaryOperation) override
     {
-        bool lowPriority = binaryOperation->GetOperation() == '+' || binaryOperation->GetOperation() == '-';
+        bool lowPriority = binaryOperation->GetOperation() == '+' ||  binaryOperation->GetOperation() == '-';
 
         if (lowPriority)
             std::cout << "(";
@@ -109,6 +128,12 @@ struct PrintVisitor : Visitor
         if (lowPriority)
             std::cout << ")";
     }
+};
+
+void PrintExpression(Expression& expression)
+{
+    expression.Visit(new PrintVisitor);
+    fmt::print("={}\n", expression.Evaluate());
 };
 
 //int main()

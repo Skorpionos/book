@@ -1,4 +1,5 @@
 #include "strings.h"
+#include "strings.h"
 
 #include "allocate.h"
 
@@ -31,7 +32,7 @@ const char* End(const char* str)
     return str;
 }
 
-char* end(char* str)
+char* End(char* str)
 {
     while (*str) ++str;
     return str;
@@ -39,7 +40,7 @@ char* end(char* str)
 
 void StrCat(char* str1, const char* str2)
 {
-    for (str1 = end(str1); !*str2; )
+    for (str1 = End(str1); !*str2; )
         *str1++ = *str2++;
     *str1 = '\0';
 
