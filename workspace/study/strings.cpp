@@ -152,8 +152,8 @@ void String::Swap(String& rhs)
     if (this == &rhs)
         return;
 
-    util::swap(m_size, rhs.m_size);
-    util::swap(m_data, rhs.m_data);
+    util::Swap(m_size, rhs.m_size);
+    util::Swap(m_data, rhs.m_data);
 }
 
 String& String::operator=(const String& rhs)

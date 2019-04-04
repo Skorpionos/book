@@ -6,7 +6,7 @@ namespace study
 void RotateOneStep(int array[], unsigned size)
 {
     for (unsigned index = 0; index < size - 1; ++index)
-        util::swap(array[index], array[index + 1]);
+        util::Swap(array[index], array[index + 1]);
 }
 
 void Rotate(int array[], unsigned size, int shift)

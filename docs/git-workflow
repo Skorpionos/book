@@ -1,5 +1,5 @@
 #GitHub
-https://github.com/Skorpionos/CppLearning.git
+https://github.com/Skorpionos/book.git
 
 #show remote repositories
 git remote -v
@@ -15,11 +15,11 @@ git remote rm <name>
 git push -u <name> <branch>
 git push -u origin master
 
-git push -u https://github.com/Skorpionos/CppLearning.git\
+git push -u https://github.com/Skorpionos/book.git\
 
 #clone
 git clone <address> <local_folder_name>
-git clone https://github.com/Skorpionos/CppLearning.git
+git clone https://github.com/Skorpionos/book.git
 
 #commit
 git commit -m 'init'
@@ -70,3 +70,11 @@ git remote -v // check
 git remote set-url origin https://github.com/Skorpionos/analyzer.git
 git remote -v // check
 git push -u origin master
+
+// changed files in commit
+git show --name-only
+
+#ssl disable
+git config --global http.sslVerify false
+
+git log --pretty=format:"%h %C(magenta)%ad | %C(white)%s%d %C(magenta)[%an]" --date=short --graph --max-count=40 $*

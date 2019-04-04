@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "../internal/io.h"
-#include "../study/arrays.h"
+#include "../study/arrays-study.h"
 
 TEST(Matrix, Transpose)
 {

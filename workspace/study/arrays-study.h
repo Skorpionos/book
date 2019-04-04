@@ -65,7 +65,7 @@ void SwapMinRow(int** m, size_t rowsCount, size_t columnsCount)
                 minRow = row;
             }
 
-    util::swap(m[0], m[minRow]);
+    util::Swap(m[0], m[minRow]);
 }
 
 } // namespace study

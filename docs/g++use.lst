@@ -1,0 +1,30 @@
+Препроцессор:
+ ☐ $ g++ -E hello.cpp -o hello_prerocessed.cpp
+
+Компиляция:
+ ☐ $ g++ -c hello.cpp
+
+Линковка:
+ ☐ $ g++ hello.o -o program.exe
+
+Автоматическая компиляция (обычный режим):
+ ☐ $ g++ hello.cpp -o hello.exe
+
+Ассемблер:
+ ☐ $ g++ -S hello.cpp
+
+Имя функции:
+ ☐ $ c++filt.exe -n _ZStL8__ioinit
+ ☐ $ std::__ioinit
+
+Дизассемблер:
+ ☐ $ objdump.exe -d main.o
+
+Содержимое дополнительных таблиц объектного файла:
+ ☐ $ objdump.exe -x main.o
+
+Иерархия классов:
+ ☐ $ g++ -fdump-class-hierarchy main.cpp
+
+Номер стандарта:
+ ☐ -std=c++17

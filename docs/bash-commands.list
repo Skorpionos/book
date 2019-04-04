@@ -1,20 +1,20 @@
 Текущий каталог:
-$ pwd
+ ☐ pwd
 
 Создать каталог:
-$ mkdir
+ ☐ mkdir
 
 Удалить:
-$ rm
+ ☐ rm
 
 Удалить каталог вместе со всем содержимым без доплнительных подтверждений:
-$ rm -rf book
+ ☐ rm -rf book
 
 Удалить каталог (пустой):
-$ rmdir
+ ☐ rmdir
 
 Переименовать:
-$ mv Hello.cpp hello.cpp
+ ☐ mv Hello.cpp hello.cpp
 
 Перенаправление потока:
-$ ./pr.exe <1.txt >2.txt
+ ☐ ./pr.exe <1.txt >2.txt

@@ -1,0 +1,33 @@
+#include "internal/io.h"
+
+#include <thread>
+
+std::string IdToString(decltype(std::this_thread::get_id()) x)
+{
+    std::ostringstream ss;
+
+    ss << x;
+
+    return ss.str();
+}
+
+void DoWork()
+{
+    for (size_t index = 0; index < 10; ++index)
+    {
+        fmt::print("DoWork: {}\n", IdToString(std::this_thread::get_id()));
+    }
+
+}
+
+int main()
+{
+    std::thread thread(DoWork);
+
+    for (size_t index = 0; index < 10; ++index)
+        fmt::print("main: {}\n", IdToString(std::this_thread::get_id()));
+
+    thread.join();
+
+    util::PrintComplete();
+}

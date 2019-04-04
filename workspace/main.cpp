@@ -2,5 +2,5 @@
 
 int main()
 {
-    util::PrintComplete();
+    return util::PrintComplete();
 }
