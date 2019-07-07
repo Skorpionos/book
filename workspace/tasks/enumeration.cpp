@@ -7,15 +7,15 @@ size_t M;
 
 std::vector<size_t> vector(N);
 
+//std::ifstream cin("C:\\Projects\\book\\workspace\\input.txt");
+//std::ofstream cout("C:\\Projects\\book\\workspace\\output.txt");
+
 using std::cin;
 using std::cout;
 
 void Print()
 {
-    static size_t counter = 0;
-
-    std::cout << "<" << ++counter << "> ";
-
+//  std::copy(vector.begin(), vector.end(), std::ostream_iterator<size_t>{std::cout, " "});
     for (size_t index = 0; index < N; ++index)
     {
         if (index)
@@ -39,13 +39,15 @@ void Do(size_t currentIndex)
 
 int main()
 {
-    N = 6;
-    M = 5;
+//    cin >> N >> M;
+    N = 3;
+    M = 2;
 
     vector.resize(N);
 
     Do(0);
 
+//    cout.close();
     return 0;
 }
 

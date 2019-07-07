@@ -34,3 +34,6 @@ const auto time3 = SolveDeltaTime(time0);
     auto result = test();
 std::cout << std::get<0>(result) << "\n";
 std::cout << std::get<1>(result) << "\n";
+
+
+for (const auto brace : {isOpen, isClosed})
