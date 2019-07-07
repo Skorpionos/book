@@ -108,10 +108,28 @@ void PrintContainerInfo(T container)
 template<class T>
 void PrintContainer(T container)
 {
-    std::cout << "[" << container.size() << "]\n ";
+    std::cout << "[" << container.size() << "] ";
     for (const auto& element : container)
         std::cout << element << " ";
     std::cout << "\n";
+}
+
+template <class T>
+void PrintItems(T container)
+{
+    for (const auto& element : container)
+        std::cout << element << " ";
+    std::cout << "\n";
+};
+
+template <class T>
+void PrintItems(T container, size_t size)
+{
+    for (size_t index = 0; index < size; ++index)
+    {
+        std::cout << container[index] << " ";
+    }
+    std::cout << "\r\n";
 }
 
 template <class Set>
@@ -206,6 +224,15 @@ void PrintContainer(T array, size_t size) noexcept
 {
     for (size_t index = 0; index < size; ++index)
         std::cout << array[index] << " ";
+    std::cout << "\n";
+}
+
+template <class I>
+void PrintContainer(I begin, I end) noexcept
+{
+    std::cout << "[" << std::distance(begin, end) << "] ";
+    for (I it = begin; it != end; ++it)
+        std::cout << *it << " ";
     std::cout << "\n";
 }
 

@@ -1,30 +1,110 @@
-Препроцессор:
- ☐ $ g++ -E hello.cpp -o hello_prerocessed.cpp
+Компиляция (обычный режим):
+ ☐ g++ -o hello main.cpp hello.cpp
 
-Компиляция:
- ☐ $ g++ -c hello.cpp
+ ☐ С отладочной информацией и без оптимизации
+ gcc main.cpp hello.cpp -g3 -o0
+
+Препроцессор:
+ ☐ g++ -E hello.cpp -o hello_prerocessed.cpp
+
+Компиляция (в объектный файл):
+ ☐ g++ -c hello.cpp
 
 Линковка:
- ☐ $ g++ hello.o -o program.exe
+ ☐ g++ hello.o -o program.exe
 
-Автоматическая компиляция (обычный режим):
- ☐ $ g++ hello.cpp -o hello.exe
+Разделяемая динамическая библиотека:
+  ☐ gcc -o libhello.so -shared hello.cpp [-fPIC]
+  Символы бибилотеки
+  ☐ nm libhello.so
+  Установить переменную окружения для поиска библиотек
+  ☐ export LD_LIBRARY_PATH=.
+  Компилировать с библиотекой
+  ☐ gcc main.cpp -L. -lhello -o hello
+  Узнать, какие утилиты используют библиотеку
+  ☐ ldd hello
+  ☐ ldd libhello.so 
 
-Ассемблер:
- ☐ $ g++ -S hello.cpp
 
 Имя функции:
- ☐ $ c++filt.exe -n _ZStL8__ioinit
- ☐ $ std::__ioinit
+ ☐ c++filt.exe -n _ZStL8__ioinit
+ ☐ std::__ioinit
+
+Ассемблер:
+ ☐ g++ -S hello.cpp
 
 Дизассемблер:
- ☐ $ objdump.exe -d main.o
+ ☐ objdump.exe -d main.o
 
 Содержимое дополнительных таблиц объектного файла:
- ☐ $ objdump.exe -x main.o
+ ☐ objdump.exe -x main.o
 
 Иерархия классов:
- ☐ $ g++ -fdump-class-hierarchy main.cpp
+ ☐ g++ -fdump-class-hierarchy main.cpp
 
-Номер стандарта:
+Трассировка:
+  ☐ Библиотечные вызовы
+    ltrace ./hello
+  ☐ Системные вызовы
+    strace ./hello
+    strace -c ./hello
+    strace -c -e trace=write,read ./hello
+
+Отладка:
+  gdb ./hello
+  gbd ./hello -c core
+  gdb ./hello -pid process-id
+
+ ☐ Автоматическое создание core dump
+  ulimit -c unlimited
+
+core dump:
+  ☐ Компиляция с отладкой
+  gcc bug.cpp -g3 -o0 -o bug
+  ☐ Включение сохранения core
+  ulimit -c unlimited
+  ☐ Отладка
+  gdb -c core ./a.out
+  ☐ Стек вызовов
+  bt
+  ☐ Teкст программы
+  list
+
  ☐ -std=c++17
+
+Пример makefile:
+  all: exe
+  exe: hello.h main.cpp lib
+    gcc main.cpp -L. -lhello -o hello
+  lib: hello.h hello.cpp
+    gcc hello.cpp -shared -o libhello.so
+  clean:
+    -rm hello libhello.so 2>/dev/null
+
+Пример программы:
+  ✔ hello.h
+  #pragma once
+  // #ifndef _HELLO_
+  // #define _HELLO_
+  #ifdef __cplusplus
+  extern "C" 
+  #endif
+  void PrintMessage(const char* text);
+  // #endif
+
+  ✔ hello.cpp
+  #include "hello.h"
+  #include <stdio.h>
+  void PrintMessage(const char* text)
+  {
+    printf("%s\n", text);
+    return;
+  }
+
+  ✔ main.cpp
+  #include "hello.h"
+  int main()
+  {
+    PrintMessage("Hello!");
+    return 0;
+  }

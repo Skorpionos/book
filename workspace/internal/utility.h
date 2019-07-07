@@ -2,7 +2,10 @@
 
 #include <cstddef>
 #include <tuple>
-
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <exception>
 #include <functional>
 
 namespace util
@@ -118,5 +121,37 @@ auto apply(F function, Args&& ... args)
 //    std::cout << a << "|" << b << "\n";
 //    return a += b;
 //};
+
+class bad_from_string : public std::exception
+{
+public:
+    bad_from_string(const char* info)
+        : m_info(info)
+    {}
+
+    const char* what() const noexcept override
+    {
+        return m_info.c_str();
+    }
+
+private:
+    std::string m_info;
+};
+
+template <class T>
+T from_string(const std::string& arg)
+{
+    std::istringstream stream(arg);
+
+    T result;
+
+    stream >> std::noskipws >> result;
+
+    if (stream.fail() || stream.peek() != EOF)
+        throw bad_from_string("Argument is wrong!");
+
+    return result;
+}
+
 
 } // namespace util

@@ -21,3 +21,6 @@ void Advance(I& it, size_t n)
 {
     AdvanceImpl(it, n, typename std::iterator_traits<I>::iterator_category());
 }
+
+
+//  std::copy(vector.begin(), vector.end(), std::ostream_iterator<size_t>{std::cout, " "});
